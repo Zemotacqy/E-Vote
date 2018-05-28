@@ -18,7 +18,7 @@ mongoose.connect(configdb.url)
 	});
 
 // get the passport configuration
-
+require('./config/passport.js')(passport);
 
 // set the environment variables
 const port = process.env.PORT || 1310;
@@ -33,7 +33,9 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-app.use(expressValidator())
+app.use(expressValidator());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 // handle the routes

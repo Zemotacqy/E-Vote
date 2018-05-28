@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 let userschema = new mongoose.Schema({
 	username : {
@@ -21,5 +22,10 @@ let userschema = new mongoose.Schema({
 		type : Date
 	}
 });
+
+// checking if password is valid
+userschema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = mongoose.model('users', userschema);

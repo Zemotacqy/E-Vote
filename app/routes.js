@@ -8,10 +8,15 @@ module.exports = function(app, passport){
 	});
 
 	// handle the login page
-	/*app.get('/login', (req, res)=>{
+	app.get('/login', (req, res)=>{
 		res.render('login.ejs', { message : req.flash('loginMessage') });
 	});
-	*/
+	app.post('/login', passport.authenticate('login', { 
+			successRedirect: '/',
+		    failureRedirect: '/login',
+		    failureFlash: true 
+		})
+	);
 
 	// handle the Signup page
 	app.get('/signup', (req, res)=>{
