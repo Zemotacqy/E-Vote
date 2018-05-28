@@ -1,0 +1,22 @@
+<html>
+	
+	<% include ./partials/head.ejs %>
+
+	<body>
+		<center>
+			<h3>login</h3><br>
+			<form class="form-control" action="/login" method="post">
+				<% if(message.length>0) { %>
+				<div class="alert alert-danger"><%= message %></div>
+				<% } %>
+				Username:<br>
+				<input type="text" name="username"><br>
+				Password:<br>
+				<input type="password" name="password"><br>
+				<input type="submit" value="submit">
+			</form>
+		</center>
+		<% include ./partials/loadjs.ejs %>		
+	</body>
+
+</html>

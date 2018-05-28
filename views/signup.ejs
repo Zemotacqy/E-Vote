@@ -1,0 +1,28 @@
+<html>
+	
+	<% include ./partials/head.ejs %>
+
+	<body>
+		<center>
+			<h3>login</h3><br>
+			<form class="form-control" action="/signup" method="post">
+				<% if(successMessage.length>0) { %>
+				<div class="alert alert-success"><%= successMessage %></div>
+				<% } %>
+				<% if(failureMessage.length>0) { %>
+				<div class="alert alert-danger"><%= failureMessage %></div>
+				<% } %>
+				Username:<br>
+				<input type="text" name="username"><br>
+				Email:<br>
+				<input type="email" name="email"><br>
+				Password:<br>
+				<input type="password" name="password"><br>
+				<input type="submit" value="submit">
+			</form>
+			<div class="btn btn-default"><a href="/">Home</a></div>
+		</center>
+		<% include ./partials/loadjs.ejs %>		
+	</body>
+
+</html>
