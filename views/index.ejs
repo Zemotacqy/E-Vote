@@ -5,6 +5,9 @@
 	<body>
 		<center>
 			<h3>Voting App</h3><br>
+			<% if(message.length>0) { %>
+				<div class="alert alert-success"><%= message %></div>
+			<% } %>
 			<div class="btn btn-default"><a href="/login">Login</a></div>
 			<div class="btn btn-default"><a href="/signup">signup</a></div>
 		</center>

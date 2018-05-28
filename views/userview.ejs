@@ -1,0 +1,26 @@
+<html>
+	
+	<% include ./partials/head.ejs %>
+
+	<body>
+		<center>
+			<% if(!user){ %>
+				<h3>Login First</h3>
+			<% }else{ %>
+
+				<!-- Enter all The HTML code here -->
+
+
+				<h3>Hello, <%= user.username %></h3>
+				<div class="btn btn-default"><a href="/user/logout">Logout</a></div>
+
+
+
+
+
+			<% } %>
+		</center>
+		<% include ./partials/loadjs.ejs %>		
+	</body>
+
+</html>

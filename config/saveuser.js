@@ -26,8 +26,8 @@ module.exports = (req, res)=>{
 				newuser.save()
 					.then((doc)=>{
 						console.log(doc);
-						req.flash('successMessage', "Successfully Added to Database.")
-						res.redirect('/signup');
+						req.flash('info', "Successfully Added to Database.")
+						res.redirect('/');
 					}).catch((err)=>{
 						console.log(err);
 						req.flash('failureMessage', "Some Error Occured!!!")
