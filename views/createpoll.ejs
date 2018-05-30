@@ -1,0 +1,41 @@
+<html>
+	
+	<% include ./partials/head.ejs %>
+
+	<body>
+		<center>
+			<% if(!user){ %>
+				<h3>Login First</h3>
+			<% }else{ %>
+
+				<!-- Enter all The HTML code here -->
+
+
+				<h3>Hello, <%= user.username %></h3><br>
+				<div class="btn btn-default"><a href="/user/logout">Logout</a></div><br>
+				<div class="btn btn-default"><a href="/user">User Home page</a></div><br>
+				<% if(createdMessage.length>0) { %>
+					<h1><%= createdMessage %></h1>
+				<% }else { %>
+					<h3>Create Poll here!!!</h3>
+					<form action="/user/createpoll" method="post" class="form-control">
+						<% if(message.length>0) { %>
+						<div class="alert alert-danger"><%= message %></div>
+						<% } %>
+						Enter Poll:<br>
+						<input type="text" name="question"><br>
+						Options:<br>
+						<input type="text" name="option1"><br>
+						<input type="text" name="option2"><br>
+						<input type="submit" value="create">
+					</form>
+				<% } %>
+
+
+
+			<% } %>
+		</center>
+		<% include ./partials/loadjs.ejs %>		
+	</body>
+
+</html>

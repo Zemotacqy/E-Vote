@@ -21,7 +21,7 @@ module.exports = function(app, passport){
 	});
 	app.post('/login', passport.authenticate('login', { 
 			successRedirect: '/user',
-		    failureRedirect: '/',
+		    failureRedirect: '/login',
 		    failureFlash: true 
 		})
 	);
@@ -38,7 +38,9 @@ module.exports = function(app, passport){
 
 
 	/* From now on, use the following format for routing:
-	*  app.<method>('<url', isAuth, (req, res){});
+	*  app.<method>('<url', isAuth, (req, res){
+	*    res.render('<ejsfile>', {user : req.user, <other object data>})
+	*  });
 	*  here isauth is neccessary to check if a user is 
 	*  logged in or not.
 	*  Don't use the isAuth middleware when user 
@@ -54,8 +56,16 @@ module.exports = function(app, passport){
 
 	// handle the user profile page
 	app.get('/user', isAuth, (req, res)=>{
-		res.render('userview.ejs', { user : req.user });
+		res.render('userview.ejs', { user : req.user, message : req.flash('profileMessage') });
 	});
 
+	// handle the createpoll page	
+	app.get('/user/createpoll', isAuth, (req, res)=>{
+		res.render('createpoll.ejs', { user : req.user, message : req.flash('createpollMessage'), createdMessage : req.flash('createdpollMessage') });
+	});
+
+	app.post('/user/createpoll', isAuth, (req, res)=>{
+		require('./../config/createpoll.js')(req, res);
+	});
 
 };

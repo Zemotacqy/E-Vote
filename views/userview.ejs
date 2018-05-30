@@ -10,9 +10,13 @@
 
 				<!-- Enter all The HTML code here -->
 
-
+				<% if(message.length>0) { %>
+				<div class="alert alert-danger"><%= message %></div>
+				<% } %>
+				
 				<h3>Hello, <%= user.username %></h3>
-				<div class="btn btn-default"><a href="/user/logout">Logout</a></div>
+				<div class="btn btn-default"><a href="/user/logout">Logout</a></div><br>
+				<div class="btn btn-default"><a href="/user/createpoll">Create Poll</a></div>
 
 
 

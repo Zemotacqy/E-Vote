@@ -21,7 +21,7 @@ module.exports = (req, res)=>{
 				newuser.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
 				newuser.email = req.body.email;
 				newuser.createdat = new Date();
-
+				newuser.mypolls = [];
 				//save the user
 				newuser.save()
 					.then((doc)=>{

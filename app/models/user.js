@@ -20,7 +20,11 @@ let userschema = new mongoose.Schema({
 	},
 	createdat : {
 		type : Date
-	}
+	},
+	mypolls : [{
+		type : mongoose.Schema.Types.ObjectId,
+		ref : 'polls'
+	}]
 });
 
 // checking if password is valid
