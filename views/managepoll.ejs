@@ -1,0 +1,58 @@
+<html>
+	
+	<% include ./partials/head.ejs %>
+
+	<body>
+		<center>
+			<% if(!user){ %>
+				<h3>Login First</h3>
+			<% }else{ %>
+
+				<!-- Enter all The HTML code here -->
+
+				<input type="hidden" name="username" value="<%= user.username %>" id="username">
+				<h3>Hello, <%= user.username %></h3><br>
+				<div class="btn btn-default"><a href="/user/logout">Logout</a></div><br>
+				<div class="btn btn-default"><a href="/user">User Home page</a></div><br>
+				<div class="btn btn-default"><a href="/user/createpoll">Create New Poll</a></div><br>
+				<% if(message.length>0) { %>
+					<div class="alert alert-danger"><%= message %></div>
+				<% } %>
+
+				<h1>Manage Poll:</h1><br>
+				<div class="polls">
+					
+				</div>
+
+
+			<% } %>
+		</center>
+		<% include ./partials/loadjs.ejs %>	
+		<script>
+			const username = document.getElementById("username").value;
+			$.get( "http://localhost:1310/api/user/"+username, function(){
+
+			}).done((data)=>{
+				//console.log(data);
+				$(".polls").innerHTML = "";
+				for(let i=0;i<data.mypolls.length;i++){
+					let pollid = data.mypolls[i];
+					$.get( "http://localhost:1310/api/poll/"+pollid, function(){
+
+					}).done((data)=>{
+						// html code to be appended for dispaying in page
+						const htmlcode = '<p>'+data.question+'</p><a href="/'+data.owner+'/deletepoll/'+data._id+'">Delete</a><hr>';
+						$(".polls").append(htmlcode);
+					}).fail(()=>{
+						console.log("Invalid api access");
+					})
+				}
+
+
+			}).fail(()=>{
+				console.log("Invalid api access!")
+			});
+		</script>	
+	</body>
+
+</html>

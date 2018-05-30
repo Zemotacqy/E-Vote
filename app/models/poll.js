@@ -16,6 +16,7 @@ let pollschema = new mongoose.Schema({
 	}],
 	owner : {
 		type : mongoose.Schema.ObjectId,
+		ref : 'users'
 	},
 	createdat : {
 		type : Date

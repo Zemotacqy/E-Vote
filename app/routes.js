@@ -1,4 +1,6 @@
-
+let usermodel = require('./models/user.js');
+let pollmodel = require('./models/poll.js');
+let mongoose = require('mongoose');
 
 module.exports = function(app, passport){
 
@@ -68,4 +70,42 @@ module.exports = function(app, passport){
 		require('./../config/createpoll.js')(req, res);
 	});
 
+	// handle the managepoll page
+	app.get('/user/managepoll', isAuth, (req, res)=>{
+		res.render('managepoll.ejs', { user : req.user, message : req.flash('managepollMessage') });
+	});
+
+	// handle api usage
+	app.get('/api/user/:usernameuri', (req, res)=>{
+		usermodel.findOne({
+			username : req.params.usernameuri
+		}, (err, user)=>{
+			if(user){
+				res.status(200).json(user);
+			}else if(!user){
+				res.render('nodata.ejs');
+			}
+		}).catch((err)=>{
+			console.log(err);
+		});
+	});
+
+	app.get('/api/poll/:pollid', (req, res)=>{
+		pollmodel.findOne({
+			_id : req.params.pollid
+		}, (err, poll)=>{
+			if(poll){
+				res.status(200).json(poll);
+			}else if(!poll){
+				res.render('nodata.ejs');
+			}
+		}).catch((err)=>{
+			console.log(err);
+		});
+	});
+
+	// handle deleting poll
+	app.get('/:userid/deletepoll/:pollid', isAuth, (req, res)=>{
+		require('./../config/deletepoll.js')(req, res);
+	});
 };

@@ -50,6 +50,17 @@ module.exports = (req, res)=>{
 							req.flash('createpollMessage', "Some error Occured");
 							res.redirect('/user/createpoll');
 						}else{
+							// populate the polls
+							pollmodel.find({})
+								.populate('owner')
+								.exec((err, polls)=>{
+									if(err){
+										console.log(err);
+									}else{
+										console.log(polls);
+									}
+							});
+							// populate the users
 							usermodel.find({})
 								.populate('mypolls')
 								.exec(function(err, users) {
@@ -70,6 +81,8 @@ module.exports = (req, res)=>{
 					req.flash('createpollMessage', "The Poll cannot be saved. Please Try Again.");
 					res.redirect('/user/createpoll');
 				});
+
+
 			}
 		}
 	}).catch((err)=>{
