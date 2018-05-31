@@ -41,8 +41,12 @@
 
 					}).done((data)=>{
 						// html code to be appended for dispaying in page
-						const htmlcode = '<p>'+data.question+'</p><a href="/'+data.owner+'/deletepoll/'+data._id+'">Delete</a><hr>';
-						$(".polls").append(htmlcode);
+						if(data.question){
+							const pollquestion = data.question;
+							const htmlcode = '<p>'+pollquestion+'</p><a href="/'+data.owner+'/deletepoll/'+data._id+'">Delete</a><br>Link: <a href="http://localhost:1310/get/'+username+'/'+pollquestion+'" target="blank">click here</a><hr>';
+							
+							$(".polls").append(htmlcode);
+						}
 					}).fail(()=>{
 						console.log("Invalid api access");
 					})

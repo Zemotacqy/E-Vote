@@ -8,7 +8,7 @@ module.exports = function(req, res){
 	usermodel.findOne({
 		_id : userid
 	}, function(err, user){
-		// user doesn't exists
+		// user doesn't exists	
 		if(!user){
 			req.flash('managepollMessage', "Invalid URI!!");
 			res.redirect('/user/managepoll');

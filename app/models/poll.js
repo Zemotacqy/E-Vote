@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 let pollschema = new mongoose.Schema({
 	question : {
 		type : String,
-		required : true
+		required : true,
+		unique : true
 	},
 	options : [{
 		option : {

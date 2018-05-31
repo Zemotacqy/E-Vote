@@ -1,0 +1,23 @@
+<html>
+	
+	<% include ./partials/head.ejs %>
+
+	<body>
+		<center>
+			
+			<%= polldata.question %><br>
+			/post/<%= userdata.username %>/<%= polldata.question %><br>
+
+			<form action="/post/<%= userdata.username %>/<%= polldata.question %>" method="post" class="form-control">
+				<h3>poll : <%= polldata.question %></h3><br>
+				<% for(let i=0;i<=polldata.options.length-1;i++ ) { %>
+					<input type="radio" name="option" value="<%= polldata.options[i].option %>"><%= polldata.options[i].option %><br>
+				<% } %>
+				<input type="submit" value="submit">
+			</form>			
+
+		</center>
+		<% include ./partials/loadjs.ejs %>		
+	</body>
+
+</html>

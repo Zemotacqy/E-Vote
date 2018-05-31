@@ -1,0 +1,21 @@
+<html>
+	
+	<% include ./partials/head.ejs %>
+
+	<body>
+		<center>
+			
+			
+
+				<h3>poll : <%= polldata.question %></h3><br>
+				<% for(let i=0;i<=polldata.options.length-1;i++ ) { %>
+					<%= polldata.options[i].option %> Votes: <%= polldata.options[i].votes %><br>
+				<% } %>
+		
+
+
+		</center>
+		<% include ./partials/loadjs.ejs %>		
+	</body>
+
+</html>

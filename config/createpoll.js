@@ -25,7 +25,7 @@ module.exports = (req, res)=>{
 					if( reqObject.hasOwnProperty(prop) ){
 						if( prop.toString().trim() != "question" ){
 							const optionObj = {
-								option : reqObject[prop],
+								option : reqObject[prop].toString().trim(),
 								votes : 0
 							};
 							optionsArray.push(optionObj);
@@ -35,19 +35,19 @@ module.exports = (req, res)=>{
 
 				// make a newpoll
 				let newpoll = new pollmodel({
-					question : req.body.question,
+					question : req.body.question.toString().trim(),
 					owner : user._id,
 					options : optionsArray,
 					createdat : new Date()
 				});
-
+				
 				newpoll.save().then((doc)=>{
 					//console.log(doc);
 					user.mypolls.push(newpoll.id);
 					user.save((err)=>{
 						if(err){
 							console.log(err);
-							req.flash('createpollMessage', "Some error Occured");
+							req.flash('createpollMessage', "Some Error Occured!!!!");
 							res.redirect('/user/createpoll');
 						}else{
 							// populate the polls
@@ -70,7 +70,8 @@ module.exports = (req, res)=>{
 										res.redirect('/user/createpoll');
 									}else{
 										//console.log(users);
-										req.flash('createdpollMessage', "Poll created successfully, visit: I am Awesome.com");
+										const polluri = "http://localhost:1310/get/"+user.username+"/"+req.body.question.toString().trim();
+										req.flash('createdpollMessage', "Poll created successfully, visit: " + polluri);
 										res.redirect('/user/createpoll');
 									}
 							});
@@ -78,7 +79,7 @@ module.exports = (req, res)=>{
 					});
 				}).catch((err)=>{
 					console.log(err);
-					req.flash('createpollMessage', "The Poll cannot be saved. Please Try Again.");
+					req.flash('createpollMessage', "Poll cannot be saved!!");
 					res.redirect('/user/createpoll');
 				});
 
@@ -87,7 +88,7 @@ module.exports = (req, res)=>{
 		}
 	}).catch((err)=>{
 		console.log(err);
-		req.flash('createpollMessage', "Some Error Occured!!!");
+		req.flash('createpollMessage', err.errmsg);
 		res.redirect('/user/createpoll');
 	});
 };

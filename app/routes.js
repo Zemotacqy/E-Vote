@@ -108,4 +108,18 @@ module.exports = function(app, passport){
 	app.get('/:userid/deletepoll/:pollid', isAuth, (req, res)=>{
 		require('./../config/deletepoll.js')(req, res);
 	});
+
+	// handle poll activity
+	app.get('/get/:username/:question', (req, res)=>{
+		require('./../config/pollactivity.js')(req, res);
+	});
+
+	app.post('/post/:username/:question', (req,res)=>{
+		require('./../config/submitanswer.js')(req, res);
+	});
+
+	// handle view results page
+	app.get('/viewresults/:pollid', (req, res)=>{
+		require('./../config/viewresults.js')(req, res);
+	});	
 };
