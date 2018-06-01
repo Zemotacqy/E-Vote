@@ -1,6 +1,7 @@
 let usermodel = require('./models/user.js');
 let pollmodel = require('./models/poll.js');
 let mongoose = require('mongoose');
+const querystring = require('querystring');
 
 module.exports = function(app, passport){
 
@@ -111,6 +112,9 @@ module.exports = function(app, passport){
 
 	// handle poll activity
 	app.get('/get/:username/:question', (req, res)=>{
+		console.log(querystring.parse(req.params.question));
+		/*console.log(querystring.parse("Hello world and mansih"));
+		console.log(querystring.stringify("whats%20your%20name?"));*/
 		require('./../config/pollactivity.js')(req, res);
 	});
 

@@ -13,8 +13,6 @@ module.exports = (req, res)=>{
 			if(!user){
 				res.render('nodata.ejs');
 			}else if(user){
-				console.log(req.params.question);
-				console.log(querystring.parse(req.params.question));
 				pollmodel.findOne({
 					question : req.params.question
 				}, (err, poll)=>{
