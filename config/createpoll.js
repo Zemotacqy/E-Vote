@@ -71,7 +71,7 @@ module.exports = (req, res)=>{
 										res.redirect('/user/createpoll');
 									}else{
 										//console.log(users);
-										const polluri = "http://localhost:1310/get/"+user.username+"/"+req.body.question.toString().trim();
+										const polluri = "https://murmuring-fortress-28297.herokuapp.com/get/"+user.username+"/"+req.body.question.toString().trim();
 										req.flash('createdpollMessage', "Poll created successfully, visit: " + polluri);
 										res.redirect('/user/createpoll');
 									}

@@ -30,20 +30,20 @@
 		<% include ./partials/loadjs.ejs %>	
 		<script>
 			const username = document.getElementById("username").value;
-			$.get( "http://localhost:1310/api/user/"+username, function(){
+			$.get( "https://murmuring-fortress-28297.herokuapp.com/api/user/"+username, function(){
 
 			}).done((data)=>{
 				//console.log(data);
 				$(".polls").innerHTML = "";
 				for(let i=0;i<data.mypolls.length;i++){
 					let pollid = data.mypolls[i];
-					$.get( "http://localhost:1310/api/poll/"+pollid, function(){
+					$.get( "https://murmuring-fortress-28297.herokuapp.com/api/poll/"+pollid, function(){
 
 					}).done((data)=>{
 						// html code to be appended for dispaying in page
 						if(data.question){
 							const pollquestion = data.question;
-							const htmlcode = '<p>'+pollquestion+'</p><a href="/'+data.owner+'/deletepoll/'+data._id+'">Delete</a><br>Link: <a href="http://localhost:1310/get/'+username+'/'+pollquestion+'" target="blank">click here</a><hr>';
+							const htmlcode = '<p>'+pollquestion+'</p><a href="/'+data.owner+'/deletepoll/'+data._id+'">Delete</a><br>Link: <a href="https://murmuring-fortress-28297.herokuapp.com/get/'+username+'/'+pollquestion+'" target="blank">click here</a><hr>';
 							
 							$(".polls").append(htmlcode);
 						}
